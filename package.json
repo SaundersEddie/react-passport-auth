@@ -1,0 +1,40 @@
+{
+  "name": "react-passport-auth",
+  "version": "1.0.0",
+  "description": "Passport Local with React",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node backend/server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'frontend/*'\" \"npm run client\"",
+    "client": "cd frontend && npm run start",
+    "install": "cd frontend && npm install",
+    "build": "cd frontend && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaundersEddie/react-passport-auth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaundersEddie/react-passport-auth/issues"
+  },
+  "homepage": "https://github.com/SaundersEddie/react-passport-auth#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "if-env": "^1.0.4",
+    "mongoose": "^6.0.12",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
