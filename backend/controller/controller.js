@@ -4,6 +4,13 @@ require('dotenv').config();
 
 module.exports = {
     registerUser: async (req, res) => {
+        try {
+            const newUser = new User(req.body);
+            await newUser.save()
+            res.status(201).json(newUser);
+        } catch (error) {
+            console.log(error)
+        }
 
     },
 
@@ -17,5 +24,5 @@ module.exports = {
 
     authMenu: async (req, res) => {
 
-    };
+    }
 }

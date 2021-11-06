@@ -28,6 +28,11 @@ const userSchema = new Schema({
         type: String,
         unique: true,
         required: true
+    },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 
@@ -37,7 +42,7 @@ userSchema.methods = {
         return bcrypt.compareSync(inputPassword, this.password)
     },
     hashPassword: plainTextPassword => {
-        return bcrypt.hashSync(plainTextPassword, 10)
+        return bcrypt.hashSync(plainTextPassword, 5)
     }
 }
 
