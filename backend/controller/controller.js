@@ -11,18 +11,29 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
-
     },
 
     loginUser: async (req, res) => {
-
+        try {
+            console.log('login')
+        } catch (error) {
+            console.log(error)
+        }
     },
 
     adminMenu: async (req, res) => {
-
+        try {
+            console.log("Admin Menu")
+        } catch (error) {
+            console.log(error)
+        }
     },
 
     authMenu: async (req, res) => {
-
+        try {
+            console.log("Are we authenticated")
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
