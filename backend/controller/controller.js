@@ -1,4 +1,5 @@
 const User = require('../models/user.js');
+const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
 
@@ -22,20 +23,23 @@ module.exports = {
             
         }
     },
-    
+
     loginUser: async (req, res) => {
         // We need to find a matching user, if located return the results
         // If not located return we never found that user
-        // Req should contain userName field
-        try {
-            console.log(req.params)
-            if (req.params) {
-                User.find({
-                    userName: req.param.username
-                })
+        // Req should contain userName and password field
 
-            }
-            res.status(201).json({ msg: req.params })
+        // Check username is valid
+        // If username is valid get password field
+
+        try {
+            console.log(req.query.username);
+            console.log(req.query.password);
+            const loginUser = await User.findOne({userName: req.query.username})
+            const passwordCheck = User.checkPassword(req.query.password)
+            console.log (passwordCheck)
+            // if (passwordCheck) {
+            res.status(201).json({loginUser})
         } catch (error) {
             console.log(error)
         }
