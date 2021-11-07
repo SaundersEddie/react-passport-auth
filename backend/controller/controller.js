@@ -14,8 +14,19 @@ module.exports = {
     },
 
     loginUser: async (req, res) => {
+        // We need to find a matching user, if located return the results
+        // If not located return we never found that user
+        // Req should contain userName field
         try {
+            console.log(req.params)
             console.log('login')
+            if (req.params) {
+                User.find({
+                    userName: req.param.username
+                })
+
+            }
+            res.status(201).json({ msg: req.params })
         } catch (error) {
             console.log(error)
         }
