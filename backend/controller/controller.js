@@ -13,6 +13,16 @@ module.exports = {
         }
     },
 
+    listAll: async (req,res) => {
+        try {
+            const allUsers = await User.find({})
+            res.status(201).json(allUsers)
+        } catch (error) {
+            console.log(error)
+            
+        }
+    },
+    
     loginUser: async (req, res) => {
         // We need to find a matching user, if located return the results
         // If not located return we never found that user
