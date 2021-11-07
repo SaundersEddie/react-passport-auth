@@ -19,7 +19,6 @@ module.exports = {
         // Req should contain userName field
         try {
             console.log(req.params)
-            console.log('login')
             if (req.params) {
                 User.find({
                     userName: req.param.username
