@@ -12,21 +12,20 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(
     session({
-      secret: process.env.APP_SECRET || "this is the default passphrase",
+      secret: process.env.SECRET || "this is the default passphrase",
       store: MongoStore.create({ mongoUrl: process.env.PROD }),
       resave: false,
       saveUninitialized: false,
     })
-  );
-
+);
 
 
 if (process.env.NODE_ENV === "production") {
     server.use("/static", express.static(path.join(__dirname, "../frontend/build/static")));
     server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "../frontend/build/")); });
-
 }
-server.listen(PORT, () => console.log(`API Server Listening On Port ${PORT} `));
+
+server.use (userRoutes);
 
 // Base Error handler
 server.use(function (err, req, res, next) {
@@ -34,3 +33,5 @@ server.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500);
 });
+
+server.listen(PORT, () => console.log(`API Server Listening On Port ${PORT} `));
