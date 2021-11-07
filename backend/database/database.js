@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const MONGO_LOCAL_URL = "mongodb://localhost/bookmarks";
+const TEST = "mongodb://localhost/bookmarks";
 require('dotenv').config();
 
 
