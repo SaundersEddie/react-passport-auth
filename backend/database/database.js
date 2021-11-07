@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const TEST = "mongodb://localhost/bookmarks";
 require('dotenv').config();
-
 
 if (process.env.PROD) {
   mongoose.connect(process.env.PROD, {
