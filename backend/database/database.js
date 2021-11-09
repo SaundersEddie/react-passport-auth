@@ -8,13 +8,14 @@ if (process.env.PROD) {
     useUnifiedTopology: true,
   });
 } else {
+  // This would technically be the local PROD call, I dont have local setup
+  // so we're calling PROD here too, should probably just whack this code. :)
   mongoose.connect(process.env.PROD, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }); // local mongo url
+  });
 }
 
-// should mongoose.connection be put in the call back of mongoose.connect???
 const database = mongoose.connection;
 database.on("error", (err) => {
   console.log(`There was an error connecting to the database: ${err}`);
