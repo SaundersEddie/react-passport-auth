@@ -1,16 +1,18 @@
 const mongoose = require("mongoose");
 // mongoose.Promise = global.Promise;
 require('dotenv').config();
+console.log(process.env.PROD_DB)
+console.log(process.env.DEV_DB)
 
-if (process.env.PROD) {
-  mongoose.connect(process.env.PROD, {
+if (process.env.NODE_ENV === 'production') {
+  console.log("Opening PROD DB")
+  mongoose.connect(process.env.PROD_DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 } else {
-  // This would technically be the local PROD call, I dont have local setup
-  // so we're calling PROD here too, should probably just whack this code. :)
-  mongoose.connect(process.env.PROD, {
+  console.log("Opening DEV DB")
+  mongoose.connect(process.env.DEV_DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -18,7 +20,7 @@ if (process.env.PROD) {
 
 const database = mongoose.connection;
 database.on("error", (err) => {
-  console.log(`There was an error connecting to the database: ${err}`);
+  console.log(`There was an error connecting to the database you nub: ${err}`);
 });
 
 database.once("open", () => {

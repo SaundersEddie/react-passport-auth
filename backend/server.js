@@ -4,9 +4,11 @@ const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const dbConnection = require("./database/database.js"); // loads our connection to the mongo database
 const passport = require('./passport');
-const routes = require('./routes');
+// const routes = require('./routes');
 const server = express();
 const PORT = process.env.PORT || 3001;
+
+process.env.NODE_ENV === 'production' ? MONGO_STORE = process.env.PROD_DB : MONGO_STORE = process.env.DEV_DB
 
 require('dotenv').config();
 server.use(express.urlencoded({ extended: true }));
@@ -14,7 +16,7 @@ server.use(express.json());
 server.use(
     session({
         secret: process.env.SECRET || "this is the default passphrase",
-        store: MongoStore.create({ mongoUrl: process.env.PROD }),
+        store: MongoStore.create({ mongoUrl: MONGO_STORE }),
         resave: false,
         saveUninitialized: false,
     })
@@ -28,7 +30,7 @@ if (process.env.NODE_ENV === "production") {
     server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "../frontend/build/")); });
 }
 
-server.use(routes);
+// server.use(routes);
 
 // Base Error handler
 server.use(function (err, req, res, next) {
