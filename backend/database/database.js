@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 // mongoose.Promise = global.Promise;
 require('dotenv').config();
-console.log(process.env.PROD_DB)
-console.log(process.env.DEV_DB)
 
 if (process.env.NODE_ENV === 'production') {
   console.log("Opening PROD DB")

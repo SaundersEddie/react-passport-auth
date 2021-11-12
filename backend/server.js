@@ -4,7 +4,7 @@ const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const dbConnection = require("./database/database.js"); // loads our connection to the mongo database
 const passport = require('./passport');
-// const routes = require('./routes');
+const routes = require('./routes');
 const server = express();
 const PORT = process.env.PORT || 3001;
 
