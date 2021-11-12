@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "production") {
     server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "../frontend/build/")); });
 }
 
-// server.use(routes);
+server.use(routes);
 
 // Base Error handler
 server.use(function (err, req, res, next) {

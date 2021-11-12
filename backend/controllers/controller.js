@@ -39,7 +39,7 @@ module.exports = {
         }
     },
     updateUser: (req, res) => {
-        const { userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends } = req.body;
+        const { firstName, lastName, userName, password, userEmail, isAdmin } = req.body;
         if (req.user) {
 
             if (userName === req.user.userName) {
@@ -55,9 +55,12 @@ module.exports = {
                         },
                         {
                             $set: {
-                                userName, firstName, lastName, userEmail,
+                                firstName,
+                                lastName,
+                                userName,
                                 password: newPassword,
-                                profileImg, userInterest, friends
+                                userEmail,
+                                isAdmin
                             }
                         },
                         (error, data) => {
@@ -76,7 +79,12 @@ module.exports = {
                         },
                         {
                             $set: {
-                                userName, firstName, lastName, userEmail, profileImg, userInterest, friends
+                                firstName,
+                                lastName,
+                                userName,
+                                password,
+                                userEmail,
+                                isAdmin
                             }
                         },
                         (error, data) => {
@@ -160,22 +168,11 @@ module.exports = {
     addFriend: (req, res) => {
         const user = req.user.userName;
         const userName = req.params.userName;
-
-        //console.log('addFriend controller');
-
         if (req.user) {
-
-            db.User.updateOne(
-                {
-                    userName: user
-                },
+            db.User.updateOne({ userName: user },
                 {
                     $push: {
-                        friends: [
-                            {
-                                userName
-                            }
-                        ],
+                        friends: [{ userName }],
                     },
                 }
             )
@@ -185,13 +182,10 @@ module.exports = {
                 .catch((err) => {
                     res.json(err);
                 });
-
         }
-
     },
     removeFriend: (req, res) => {
         if (req.user) {
-
             db.User.findOneAndUpdate(
                 { userName: req.user.userName },
                 { $pull: { friends: { userName: req.params.userName } } }
@@ -201,12 +195,11 @@ module.exports = {
                 .catch((err) => {
                     res.json(err);
                 });
-
         }
     },
     register: (req, res) => {
-        const { firstName, lastName, userName, password, userEmail, friends, userInterest, profileImg } = req.body;
-        // ADD VALIDATION
+        console.log(req.body)
+        const { firstName, lastName, userName, password, userEmail, isAdmin } = req.body;
         db.User.findOne({ userName: userName }, (err, userMatch) => {
             if (userMatch) {
                 return res.json({
@@ -219,9 +212,7 @@ module.exports = {
                 userName: userName,
                 password: password,
                 userEmail: userEmail,
-                friends: friends,
-                userInterest: userInterest,
-                profileImg: profileImg
+                isAdmin: isAdmin,
             });
             newUser.save((err, savedUser) => {
                 if (err) return res.json(err);
@@ -239,11 +230,11 @@ module.exports = {
         }
     },
     auth: function (req, res, next) {
-        // console.log(req.body);
+        console.log("In auth:", req.body);
         next();
     },
     authenticate: (req, res) => {
-        //console.log('req:', req);
+        console.log('In Authenticate:', req.body);
         //console.log('hit');
         const user = JSON.parse(JSON.stringify(req.user)); // hack
         const cleanUser = Object.assign({}, user);
@@ -254,5 +245,3 @@ module.exports = {
         res.json({ user: cleanUser });
     }
 };
-
-console.log('Inside our userController');
