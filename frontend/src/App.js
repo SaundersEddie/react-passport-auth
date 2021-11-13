@@ -31,33 +31,14 @@ export default function App() {
             </Navbar.Collapse>
           </Navbar>
           <Routes>
-            {/* <Route path="/" exact render={() => <Home />} /> */}
             <Route path="/" exact element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/auth" element={<AuthOnly />} />
             <Route path="/admin" element={<AdminOnly />} />
-
           </Routes>
         </Container>
       </Router>
     </div>
   );
 }
-
-
-
-
-//  {/* <Link className='nav-link' to='/Login'>Metro</Link> */}
-//  {/* <Link className='nav-link' to='/Admin'>Metro</Link> */}
-
-// {/* <About /> */}
-// {/* <Navbar.Text> */}
-// {/* <TimeandWeather /> */}
-// {/* </Navbar.Text> */}
-
-//  {/* <Route path="/hotels" render={() => <Hotels/>} /> */}
-//     {/* <Route path="/metro" render={() => <Metro/>} /> */}
-//     {/* <Route path="/events" render={() => <Events/>} /> */}
-//     {/* <Route path="/tours" render={() => <Tours/>} /> */}
-//     {/* <Route path="/attractions" render={() => <Attractions/>} /> */}
