@@ -15,7 +15,7 @@ export default function App() {
   return (
     <div>
       <Router>
-        <Container className="p-1" fluid={false}>
+        <Container className="p-1">
           <Navbar className="border-bottom" bg="transparent" expand="lg" sticky="top">
             <Navbar.Brand>Auth Test</Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
@@ -39,6 +39,6 @@ export default function App() {
           </Routes>
         </Container>
       </Router>
-    </div>
+    </div >
   );
 }
