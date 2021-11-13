@@ -2,8 +2,8 @@ const router = require("express").Router();
 const userController = require("../../controllers/controller");
 
 //Matches with "/api/user"
-router.route("/")
-    .put(userController.updateUser);
+// router.route("/")
+// .put(userController.updateUser);
 
 // router.route("/users")
 //     .get(userController.getUsers);
