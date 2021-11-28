@@ -38,6 +38,14 @@ export default function Register() {
         }
         console.log(userData);
         axios.post(`/auth/register`, userData)
+        setValues({
+            firstName: '',
+            lastName: '',
+            userName: '',
+            password: '',
+            userEmail: '',
+            isAdmin: false
+        })
     }
 
     return (
