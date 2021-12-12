@@ -1,62 +1,47 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcryptjs')
-
 
 const userSchema = new Schema({
     firstName: {
         type: String,
         unique: false,
-        required: true
+        required: true,
+        max: 255
     },
     lastName: {
         type: String,
         unique: false,
-        required: true
+        required: true,
+        max: 255
     },
     userName: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        min: 6,
+        max: 255
     },
     password: {
         type: String,
         unique: false,
-        required: true
+        required: true,
+        min: 8,
     },
     userEmail: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        max: 255
     },
     isAdmin: {
         type: Boolean,
         required: true,
         default: false
-    }
-})
-
-// Define schema methods
-userSchema.methods = {
-    checkPassword: function (inputPassword) {
-        return bcrypt.compareSync(inputPassword, this.password)
     },
-    hashPassword: plainTextPassword => {
-        return bcrypt.hashSync(plainTextPassword, 5)
-    }
-}
-
-// Define hooks for pre-saving
-userSchema.pre('save', function (next) {
-    if (!this.password) {
-        // console.log('No password provided!');
-        next()
-    } else {
-        this.password = this.hashPassword(this.password)
-        next()
+    date: {
+        type: Date,
+        default: Date.now()
     }
 })
 
-// Create reference to User & export
-const User = mongoose.model('User', userSchema, 'user')
-module.exports = User
+module.exports = mongoose.model('User', userSchema );
