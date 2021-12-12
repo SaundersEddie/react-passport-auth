@@ -30,7 +30,12 @@ export default function Login() {
             userName: values.userName,
             password: values.password
         }
-        axios.post('/auth/login', userData);
+        console.log ('data being sent: ',userData);
+        axios
+            .post('/api/user/login', userData)
+            .then (res => {
+                console.log ('Data Returned', res.data)
+            })
     }
 
     return (
@@ -47,7 +52,7 @@ export default function Login() {
                             name='userName'
                             type="text"
                             placeholder="Username"
-                            value={values.lastName}
+                            value={values.userName}
                             onChange={onChangeOurForm}
                         />
                     </Col>
@@ -60,7 +65,7 @@ export default function Login() {
                             name='password'
                             type="password"
                             placeholder="Password"
-                            value={values.lastName}
+                            value={values.password}
                             onChange={onChangeOurForm}
                         />
                     </Col>

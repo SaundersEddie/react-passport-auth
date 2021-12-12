@@ -12,7 +12,8 @@ export default {
   },
   // Log the user in
   login: function (userData) {
-    return axios.post('/auth/login', userData);
+    console.log(userData);
+    return axios.post('/api/user/login', userData);
   },
   // New user registration
   signup: function (userData) {

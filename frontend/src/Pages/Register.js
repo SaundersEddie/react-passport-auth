@@ -37,7 +37,11 @@ export default function Register() {
             isAdmin: false
         }
         console.log(userData);
-        axios.post(`/auth/register`, userData)
+        axios
+            .post(`/api/user`, userData)
+            .then (res => {
+                console.log ('Result returned: ', res)
+            })
         setValues({
             firstName: '',
             lastName: '',

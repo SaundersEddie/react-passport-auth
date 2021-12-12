@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 const authRoutes = require('./routes/auth');
 const protRoute = require('./routes/protectedRoute');
 const dbConnection = require("./database/database.js"); // loads our connection to the mongo database
@@ -11,11 +10,11 @@ require('dotenv').config();
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
-// const path = require('path');
-// if (process.env.NODE_ENV === "production") {
-    // server.use("/static", express.static(path.join(__dirname, "../frontend/build/static")));
-    // server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "../frontend/build/")); });
-// }
+const path = require('path');
+if (process.env.NODE_ENV === "production") {
+    server.use("/static", express.static(path.join(__dirname, "../frontend/build/static")));
+    server.get("/", (req, res) => { res.sendFile(path.join(__dirname, "../frontend/build/")); });
+}
 
 server.use('/api/user', authRoutes);
 server.use('/api/prot', protRoute);

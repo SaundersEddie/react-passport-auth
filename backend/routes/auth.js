@@ -7,6 +7,7 @@ const { registerValidation, loginValidation } = require('../validation');
 require('dotenv').config();
 
 router.post ('/register', async (req, res) => {
+    console.log ('Incoming Register Data: ', req.body)
     const { error } = registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     
@@ -32,7 +33,7 @@ router.post ('/register', async (req, res) => {
 })
 
 router.post('/login', async (req,res) => {
-    console.log (req.body);
+    console.log ("login incoming data: ",req.body);
 
     const {error} = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -45,6 +46,7 @@ router.post('/login', async (req,res) => {
     
     const token = jwt.sign({_id: user._id}, process.env.SECRET);
     res.header ('auth-token', token).send(token);
+    console.log ('returning: ', token )
 })
 
 module.exports = router;
