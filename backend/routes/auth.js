@@ -9,10 +9,16 @@ require('dotenv').config();
 router.post ('/register', async (req, res) => {
     console.log ('Incoming Register Data: ', req.body)
     const { error } = registerValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) {
+        console.log ('Error in validation');
+        return res.status(400).send(error.details[0].message);
+    }
     
     const emailExist = await User.findOne({userEmail: req.body.userEmail})
-    if (emailExist) return res.status(400).send('That email is already in use')
+    if (emailExist) {
+        console.log ('Error in email check');
+        return res.status(400).send('That email is already in use')
+    }
     
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
@@ -26,6 +32,7 @@ router.post ('/register', async (req, res) => {
     });
     try {
         const saveUser = await user.save()
+        console.log ("Saving User")
         res.send (saveUser._id)
     } catch (error) {
         res.status(400).send(error)

@@ -33,12 +33,11 @@ export default function Register() {
             lastName: values.lastName,
             userName: values.userName,
             password: values.password,
-            userEmail: values.userEmail,
-            isAdmin: false
+            userEmail: values.userEmail
         }
         console.log(userData);
         axios
-            .post(`/api/user`, userData)
+            .post(`/api/user/register`, userData)
             .then (res => {
                 console.log ('Result returned: ', res)
             })
@@ -47,8 +46,7 @@ export default function Register() {
             lastName: '',
             userName: '',
             password: '',
-            userEmail: '',
-            isAdmin: false
+            userEmail: ''
         })
     }
 
