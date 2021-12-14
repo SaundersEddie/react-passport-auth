@@ -56,4 +56,10 @@ router.post('/login', async (req,res) => {
     console.log ('returning: ', token )
 })
 
+router.post('/test', (req, res) => {
+    console.log ('test body: ', req.body);
+    console.log ('test headers ', req.headers);
+    res.status (200).send('Test Route');
+})
+
 module.exports = router;
