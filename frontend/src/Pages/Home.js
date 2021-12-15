@@ -1,6 +1,27 @@
 import React from 'react';
+import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 export default function Home() {
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        console.log("Test Clicked Clicked!")
+        console.log(sessionStorage.getItem('authtoken'));
+        axios
+            .get('/api/prot/', 
+                { 'headers': 
+                    {'authtoken': sessionStorage.getItem('authtoken') }
+                })
+            .then (res => {
+                console.log ('Data Returned:', res.data);
+            })
+    }
+
+
     return (
         <>
             <h1>Our Home Page.</h1>
@@ -11,6 +32,20 @@ export default function Home() {
             <p>The source code can be located here:</p>
             <p><a href="https://github.com/EXSsaunders/washingtondc" target="_blank" rel="noopener noreferrer">Source Code</a></p>
             <p>Eddie</p>
+
+            <p>Testing Auth Setup</p>
+
+            <Form onSubmit={onSubmit}>
+            <Row>
+                <div className="form-group">
+                    <input
+                        type="submit"
+                        value="Protected Route"
+                        className="Button"
+                    />
+                </div>
+            </Row>
+            </Form>
         </>
     )
 }
