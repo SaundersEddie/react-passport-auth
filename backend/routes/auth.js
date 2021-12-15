@@ -52,8 +52,8 @@ router.post('/login', async (req,res) => {
     if (!validPass) return res.status(400).send('Username or Password is incorrect');
     
     const token = jwt.sign({_id: user._id}, process.env.SECRET);
-    res.header ('auth-token', token).send(token);
-    localStorage.setItem('auth-token', token);
+    res.header ('authToken', token).send(token);
+    // await localStorage.setItem('auth-token', token);
     console.log ('returning: ', token )
 })
 

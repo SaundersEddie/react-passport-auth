@@ -34,7 +34,10 @@ export default function Login() {
         axios
             .post('/api/user/login', userData)
             .then (res => {
-                console.log ('Data Returned', res.data)
+                const ourHeaders = res.headers;
+                console.log ('Data Returned:', ourHeaders.authtoken);
+                localStorage.setItem('authtoken', res.headers.authtoken);
+                window.location.reload(true);
             })
     }
 
