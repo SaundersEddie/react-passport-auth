@@ -63,7 +63,7 @@ export default class App extends Component {
     }
 
     validateStatus() {
-        if (localStorage.getItem('authtoken')) {
+        if (sessionStorage.getItem('authtoken')) {
             this.setState ({
                 loggedIn: true
             })

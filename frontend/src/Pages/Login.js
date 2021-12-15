@@ -36,7 +36,7 @@ export default function Login() {
             .then (res => {
                 const ourHeaders = res.headers;
                 console.log ('Data Returned:', ourHeaders.authtoken);
-                localStorage.setItem('authtoken', res.headers.authtoken);
+                sessionStorage.setItem('authtoken', res.headers.authtoken);
                 window.location.reload(true);
             })
     }
