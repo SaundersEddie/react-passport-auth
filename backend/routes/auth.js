@@ -53,6 +53,7 @@ router.post('/login', async (req,res) => {
     
     const token = jwt.sign({_id: user._id}, process.env.SECRET);
     res.header ('auth-token', token).send(token);
+    localStorage.setItem('auth-token', token);
     console.log ('returning: ', token )
 })
 
